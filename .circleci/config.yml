@@ -19,6 +19,10 @@ jobs:
       - checkout
 
       - run:
+          name : Install modules
+          command : npm install
+
+      - run:
           name: Greeting
           command: echo Hello, world.
 
