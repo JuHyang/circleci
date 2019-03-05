@@ -15,17 +15,17 @@ jobs:
           paths:
             - ~/usr/local/lib/node_modules  # location depends on npm version
           key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
-    # steps:
-    #   - checkout
+    
+      - checkout
 
-    #   - run:
-    #       name: Greeting
-    #       command: echo Hello, world.
+      - run:
+          name: Greeting
+          command: echo Hello, world.
 
-    #   - run:
-    #       name: Print the Current Time
-    #       command: date
+      - run:
+          name: Print the Current Time
+          command: date
 
-    #   - run :
-    #       name : run build
-    #       command : npm run build
+      - run :
+          name : run build
+          command : npm run build
