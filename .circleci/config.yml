@@ -2,19 +2,30 @@ version: 2
 jobs:
   build:
     docker:
-      - image: debian:stretch
-
+    - image: circleci/node:8.9.1
+    working_directory: ~/connect-four-vue
     steps:
-      - checkout
+      - restore_cache:
+          keys:
+            # when lock file changes, use increasingly general patterns to restore cache
+            - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - node-v1-{{ .Branch }}-
+            - node-v1-
+      - save_cache:
+          paths:
+            - ~/usr/local/lib/node_modules  # location depends on npm version
+          key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+    # steps:
+    #   - checkout
 
-      - run:
-          name: Greeting
-          command: echo Hello, world.
+    #   - run:
+    #       name: Greeting
+    #       command: echo Hello, world.
 
-      - run:
-          name: Print the Current Time
-          command: date
+    #   - run:
+    #       name: Print the Current Time
+    #       command: date
 
-      - run :
-          name : run build
-          command : npm run build
+    #   - run :
+    #       name : run build
+    #       command : npm run build
