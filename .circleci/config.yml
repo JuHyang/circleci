@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
     - image: circleci/node:8.9.1
-    working_directory: ~/connect-four-vue
+    working_directory: ~/circleCI
     steps:
       - restore_cache:
           keys:
@@ -33,3 +33,20 @@ jobs:
       - run :
           name : run build
           command : npm run build
+
+      - run :
+          name : install aws
+          command : sudo pip install awscli --upgrade --user
+
+      - run :
+          name : Deplay to S3
+          command : aws s3 sync /dist s3://seed-kau.com
+
+workflows : 
+  version: 2
+  build-deploy:
+    jobs:
+      - deploy:
+        filters:
+          branches :
+            only : master
