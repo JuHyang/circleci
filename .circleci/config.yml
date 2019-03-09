@@ -16,17 +16,12 @@ jobs:
           name : run build
           command : npm run build
   deploy:
-      docker:
-        - image: circleci/python:2.7-jessie
       working_directory: ~/circleCI
       steps:
-        - run :
-            name : check status
-            command : ls
-
+        - checkout
         - run:
             name: Install awscli
-            command: sudo pip install awscli
+            command: sudo apt-get -y -qq install awscli
         - run:
             name: Deploy to S3
             command: aws s3 sync dist/ s3://seed-kau.com --delete
