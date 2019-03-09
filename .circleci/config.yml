@@ -42,11 +42,11 @@ jobs:
           name : Deplay to S3
           command : aws s3 sync /dist s3://seed-kau.com
 
-workflows : 
-  version: 2
-  build-deploy:
-    jobs:
-      - deploy:
-        filters:
-          branches :
-            only : master
+# workflows : 
+#   version: 2
+#   build-deploy:
+#     jobs:
+#       - deploy:
+#         filters:
+#           branches :
+#             only : master
