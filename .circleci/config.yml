@@ -16,9 +16,12 @@ jobs:
           name : run build
           command : npm run build
   deploy:
+      docker:
+        - image: circleci/python:2.7-jessie
       working_directory: ~/circleCI
       steps:
         - checkout
+
         - run:
             name: Install awscli
             command: sudo apt-get -y -qq install awscli
